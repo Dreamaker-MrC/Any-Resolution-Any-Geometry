@@ -1,0 +1,835 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="description"
+        content="Any Resolution Any Geometry: From Multi-View To Multi-Patch">
+  <meta name="keywords" content="Any Resolution Any Geometry: From Multi-View To Multi-Patch">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Any Resolution Any Geometry: From Multi-View To Multi-Patch</title>
+
+  <!-- Bootstrap -->
+  <link rel="stylesheet" href="./static/css/bootstrap-4.4.1.css">
+
+  <!-- Global site tag (gtag.js) - Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-PYVRSFMDRL"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+
+    function gtag() {
+      dataLayer.push(arguments);
+    }
+
+    gtag('js', new Date());
+
+    gtag('config', 'G-PYVRSFMDRL');
+  </script>
+
+  
+
+  <link href="https://fonts.googleapis.com/css?family=Google+Sans|Noto+Sans|Castoro"
+        rel="stylesheet">
+  
+  <link rel="stylesheet" href="./static/css/bulma.min.css">
+  <link rel="stylesheet" href="./static/css/bulma-carousel.min.css">
+  <link rel="stylesheet" href="./static/css/bulma-slider.min.css">
+  <link rel="stylesheet" href="./static/css/fontawesome.all.min.css">
+  <link rel="stylesheet"
+        href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
+  <link rel="stylesheet" href="./static/css/index.css">
+  <link rel="icon" href="./images/favicon.png">
+  
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script defer src="./static/js/fontawesome.all.min.js"></script>
+  <script src="./static/js/bulma-carousel.min.js"></script>
+  <script src="./static/js/bulma-slider.min.js"></script>
+  <script src="./static/js/index.js"></script>
+  <script src="./static/js/app.js"></script>
+  <script src="./static/js/video_comparison.js"></script>
+
+  <link rel="stylesheet" href="./static/css/dics.original.css">
+  <script src="./static/js/event_handler.js"></script>
+  <script src="./static/js/dics.original.js"></script>
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="./static/js/jquery.event.move.js"></script>
+  <script src="./static/js/jquery.twentytwenty.js"></script>
+  <link rel="stylesheet" href="./static/css/twentytwenty.css">
+
+  <script src="https://kit.fontawesome.com/e8d9e5563c.js" crossorigin="anonymous"></script> 
+
+
+  <style>
+    .magnifier-wrapper {
+      display: inline-block;
+      width: 100%;
+      max-width: 100%;
+      overflow-x: auto;
+      --display-scale: 1;
+    }
+
+    .magnifier-groups {
+      width: 100%;
+    }
+
+    .magnifier-group-controls {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-bottom: 16px;
+    }
+
+    .magnifier-group-button {
+      border: 1px solid #c5c5c5;
+      background-color: #ffffff;
+      color: #363636;
+      padding: 6px 18px;
+      border-radius: 999px;
+      font-size: 0.95rem;
+      cursor: pointer;
+      transition: background-color 0.2s ease, color 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    .magnifier-group-button:hover {
+      background-color: #f0f0f0;
+    }
+
+    .magnifier-group-button.is-active {
+      background-color: #3273dc;
+      color: #ffffff;
+      border-color: #3273dc;
+      box-shadow: 0 4px 12px rgba(50, 115, 220, 0.25);
+    }
+
+    .magnifier-group.is-hidden {
+      display: none;
+    }
+
+    .pipeline-wrapper {
+      position: relative;
+      width: 100%;
+      overflow: visible;
+      text-align: center;
+    }
+
+    .pipeline-wrapper img {
+      display: block;
+      width: 160%;
+      max-width: 1200px;
+      position: relative;
+      left: 50%;
+      transform: translateX(-50%);
+    }
+
+    .magnifier-controls {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 12px;
+      margin-bottom: 12px;
+      flex-wrap: wrap;
+    }
+
+    .magnifier-zoom-display {
+      font-size: 0.95rem;
+      color: #363636;
+      font-weight: 600;
+    }
+
+    .magnifier-zoom-input {
+      width: 200px;
+      max-width: 100%;
+    }
+
+    .magnifier-hint {
+      font-size: 0.85rem;
+      color: #6b6b6b;
+      margin-left: 8px;
+      white-space: nowrap;
+    }
+
+    .magnifier-stack {
+      position: relative;
+      display: flex;
+      flex-direction: row;
+      flex-wrap: wrap;
+      justify-content: center;
+      align-items: flex-start;
+      gap: 24px;
+      width: calc(100% * var(--display-scale));
+      max-width: none;
+      margin: 0 auto;
+      touch-action: none;
+    }
+
+    .magnifier-item {
+      position: relative;
+      flex: 1 1 32%;
+      max-width: 33%;
+      min-width: 260px;
+    }
+
+    .magnifier-item .magnifier-image {
+      width: 100%;
+      display: block;
+      border-radius: 6px;
+    }
+
+    .magnifier-item .magnifier-lens {
+      position: absolute;
+      border: 2px solid rgba(255, 255, 255, 0.9);
+      border-radius: 12px;
+      width: 320px;
+      height: 210px;
+      pointer-events: none;
+      opacity: 0;
+      transition: opacity 0.15s ease-out;
+      background-repeat: no-repeat;
+      box-shadow: 0 12px 30px rgba(0, 0, 0, 0.35);
+      will-change: transform, left, top, background-position, opacity;
+      overflow: hidden;
+    }
+
+    .magnifier-item .magnifier-lens.is-visible {
+      opacity: 1;
+    }
+
+    .magnifier-caption {
+      margin-top: 8px;
+      text-align: center;
+      font-size: 0.95rem;
+      color: #4a4a4a;
+      font-weight: 600;
+    }
+
+    @media (max-width: 768px) {
+      .magnifier-controls {
+        justify-content: center;
+      }
+
+      .magnifier-stack {
+        flex-direction: column;
+        align-items: stretch;
+      }
+
+      .magnifier-item {
+        max-width: 100%;
+        min-width: 0;
+      }
+
+      .magnifier-item .magnifier-lens {
+        width: 220px;
+        height: 150px;
+      }
+
+      .magnifier-hint {
+        margin-left: 0;
+        margin-top: 6px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+<script>
+  $(window).on('load', function () {
+      $(".twentytwenty-container").twentytwenty({
+          before_label: 'Baseline1step',
+          after_label: 'Ours',
+          default_offset_pct: 0.3,
+          no_overlay: false,
+      });
+  });
+  </script>
+
+
+<section class="hero">
+  <div class="hero-body">
+    <div class="container is-max-desktop">
+      <div class="columns is-centered">
+        <div class="column has-text-centered">
+          <h1 class="title is-1 publication-title" style="margin-bottom: 0"><strong>Any Resolution Any Geometry: From Multi-View To Multi-Patch</strong></h1>
+          <h2 class="title is-4" style="color: #ff0000; margin-top: 0.35em; margin-bottom: 0.6em;">CVPR 2026</h2>
+          <div class="is-size-5 publication-authors">
+            <span class="author-block"><a href="https://dreamaker-mrc.github.io/" target="_blank" rel="noopener noreferrer">Wenqing Cui</a><sup>1</sup>,</span>
+            <span class="author-block"><a href="https://zhyever.github.io/" target="_blank" rel="noopener noreferrer">Zhenyu Li</a><sup>1,*</sup>,</span>
+            <span class="author-block">Mykola Lavreniuk<sup>2,*</sup>,</span>
+            <span class="author-block">Jian Shi<sup>1</sup>,</span>
+            <span class="author-block">Ramzi Idoughi<sup>1</sup>,</span>
+            <span class="author-block">Xiangjun Tang<sup>1</sup>,</span>
+            <span class="author-block"><a href="https://peterwonka.net/" target="_blank" rel="noopener noreferrer">Peter Wonka</a><sup>1</sup></span>
+          </div>
+          <div class="is-size-5 publication-authors">
+            <span class="author-block"><sup>1</sup>KAUST, <sup>2</sup>Space Research Institute NASU-SSAU</span>
+            <br>
+            <span class="author-block"><sup>*</sup>Equal contribution</span>
+          </div>
+
+
+          <div class="column has-text-centered">
+            <div class="publication-links">
+              <span class="link-block">
+                <a href="#" target="_blank" rel="noopener noreferrer" class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                    <i class="ai ai-arxiv"></i>
+                  </span>
+                  <span>arXiv</span>
+                </a>
+              </span>
+              <span class="link-block">
+                <a href="https://github.com/Dreamaker-MrC/Any-Resolution-Any-Geometry" target="_blank" rel="noopener noreferrer" class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                    <i class="fab fa-github"></i>
+                  </span>
+                  <span>Code</span>
+                </a>
+              </span>
+            </div>
+          </div>
+
+          <div style="text-align:center;">
+            <p style="margin-top: 10px">
+              On in-the-wild high-resolution images, our method produces depth and normal maps with sharp boundaries and globally consistent geometry. Hover over the images to zoom in, and use the magnification slider above to adjust the magnification level and inspect the improved fine-detail preservation and depth–normal consistency across all predictions.           </p>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div style="text-align: center;margin-bottom: 10em;">
+  <div class="magnifier-groups">
+    <div class="magnifier-group-controls">
+      <button type="button" class="magnifier-group-button is-active" data-target="0">Scene 1 (8K)</button>
+      <button type="button" class="magnifier-group-button" data-target="1">Scene 2 (4K)</button>
+      <button type="button" class="magnifier-group-button" data-target="2">Scene 3 (2k)</button>
+    </div>
+
+    <div class="magnifier-group" data-group="0">
+      <div class="magnifier-wrapper" data-image-scale="0.9">
+        <div class="magnifier-controls">
+          <span class="magnifier-zoom-display">Magnification：<strong class="magnifier-zoom-value">1.5×</strong></span>
+          <input type="range" class="magnifier-zoom-input" min="1" max="3" step="0.1" value="1.5">
+          <br>
+          <span class="magnifier-hint">Drag to adjust zoom level</span>
+        </div>
+        <div class="magnifier-stack" data-zoom="1.5">
+          <div class="magnifier-item">
+            <img class="magnifier-image" src="./images/zs1.jpg" alt="Input RGB">
+            <div class="magnifier-lens"></div>
+            <div class="magnifier-caption">Input RGB · Scene 1 (8K)</div>
+          </div>
+          <div class="magnifier-item">
+            <img class="magnifier-image" src="./images/zs1_pred.jpg" alt="Our Depth Prediction">
+            <div class="magnifier-lens"></div>
+            <div class="magnifier-caption">Our Depth Prediction · Scene 1 (8K)</div>
+          </div>
+          <div class="magnifier-item">
+            <img class="magnifier-image" src="./images/kitti_id1_ours.jpg" alt="Our Normal Prediction">
+            <div class="magnifier-lens"></div>
+            <div class="magnifier-caption">Our Normal Prediction · Scene 1 (8K)</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="magnifier-group is-hidden" data-group="1">
+      <div class="magnifier-wrapper" data-image-scale="0.9">
+        <div class="magnifier-controls">
+          <span class="magnifier-zoom-display">Magnification：<strong class="magnifier-zoom-value">1.5×</strong></span>
+          <input type="range" class="magnifier-zoom-input" min="1" max="3" step="0.1" value="1.5">
+          <br>
+          <span class="magnifier-hint">Drag to adjust zoom level</span>
+        </div>
+        <div class="magnifier-stack" data-zoom="1.5">
+          <div class="magnifier-item">
+            <img class="magnifier-image" src="./images/zs2.jpg" alt="Input RGB (Scene 2)">
+            <div class="magnifier-lens"></div>
+            <div class="magnifier-caption">Input RGB · Scene 2 (4K)</div>
+          </div>
+          <div class="magnifier-item">
+            <img class="magnifier-image" src="./images/zs2_pred.jpg" alt="Depth Prediction (Scene 2)">
+            <div class="magnifier-lens"></div>
+            <div class="magnifier-caption">Our Depth Prediction · Scene 2 (4K)</div>
+          </div>
+          <div class="magnifier-item">
+            <img class="magnifier-image" src="./images/kitti_id2_ours.jpg" alt="Normal Prediction (Scene 2)">
+            <div class="magnifier-lens"></div>
+            <div class="magnifier-caption">Our Normal Prediction · Scene 2 (4K)</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="magnifier-group is-hidden" data-group="2">
+      <div class="magnifier-wrapper" data-image-scale="0.9">
+        <div class="magnifier-controls">
+          <span class="magnifier-zoom-display">Magnification：<strong class="magnifier-zoom-value">1.5×</strong></span>
+          <input type="range" class="magnifier-zoom-input" min="1" max="3" step="0.1" value="1.5">
+          <br>
+          <span class="magnifier-hint">Drag to adjust zoom level</span>
+        </div>
+        <div class="magnifier-stack" data-zoom="1.5">
+          <div class="magnifier-item">
+            <img class="magnifier-image" src="./images/zs3.jpg" alt="Input RGB (Scene 3)">
+            <div class="magnifier-lens"></div>
+            <div class="magnifier-caption">Input RGB · Scene 3 (2k)</div>
+          </div>
+          <div class="magnifier-item">
+            <img class="magnifier-image" src="./images/zs3_pred.jpg" alt="Depth Prediction (Scene 3)">
+            <div class="magnifier-lens"></div>
+            <div class="magnifier-caption">Our Depth Prediction · Scene 3 (2k)</div>
+          </div>
+          <div class="magnifier-item">
+            <img class="magnifier-image" src="./images/kitti_id3_ours.jpg" alt="Normal Prediction (Scene 3)">
+            <div class="magnifier-lens"></div>
+            <div class="magnifier-caption">Our Normal Prediction · Scene 3 (2k)</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+
+
+
+
+
+<section class="Metric Depth results">
+  <div class="container is-max-desktop">
+
+    <!-- Results. -->
+    <div class="columns is-centered ">
+      <div class="column is-full-width">
+        <h2 class="title is-3 has-text-centered" style="margin-top: -30px">👀 Interactive Comparison</h2>        
+        <p style="text-align:center; " class="has-text-centered">
+          Drag for interactive comparison. 
+          <br>
+          <br>
+        </p>
+
+        <br><br>
+
+        <div class="has-text-centered" style="text-align: center;">
+          <h2 class="title is-4">In-the-Wild Samples</h2>
+        </div>
+        
+        <h3 class="title is-5 has-text-centered" style="margin-top: 12px; margin-bottom: 20px;">Depth Estimation</h3>
+        <p style="text-align:center; " class="has-text-centered">
+          <br>
+          <br>
+        </p>
+        <div class="container">
+          <ul class="nav nav-tabs nav-fill nav-justified" id="object-scale-recon">
+              <li class="nav-item">
+                <a class="nav-link active" onclick="objectSceneEvent(0)">1</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" onclick="objectSceneEvent(1)">2</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" onclick="objectSceneEvent(2)">3</a>
+              </li>
+          </ul>
+          <div class="b-dics" style="width: 1000px; font-weight: 600;">
+              <img src="images/zs1.jpg" alt="RGB">
+              <img src="images/zs1_pred.jpg" alt="Ours">
+              <img src="images/zs1_base.jpg" alt="Depth-Anything V2"> 
+          </div>
+        </div>
+
+        <br>
+        <h3 class="title is-5 has-text-centered" style="margin-top: 12px; margin-bottom: 20px;">Surface Normal Estimation</h3>
+        <p style="text-align:center; " class="has-text-centered">
+          <br>
+          <br>
+        </p>
+
+        <div class="container">
+          <ul class="nav nav-tabs nav-fill nav-justified" id="id-kitti-recon">
+              <li class="nav-item">
+                <a class="nav-link active" onclick="id_kitti(0)">1</a>
+              </li>      
+              <li class="nav-item">
+                <a class="nav-link" onclick="id_kitti(1)">2</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" onclick="id_kitti(2)">3</a>
+              </li>
+          </ul>
+          <div class="b-dics" style="width: 1000px; font-weight: 600;">
+              <img src="images/kitti_id1.jpg" alt="RGB">
+              <img src="images/kitti_id1_ours.jpg" alt="Ours">
+              <img src="images/kitti_id1_zoe.jpg" alt="Metric3D V2"> 
+          </div>
+        </div>
+        
+        <br>
+        <br><br>
+        <div class="has-text-centered" style="text-align: center;">
+          <h2 class="title is-4">In-Domain Samples from UnrealStereo4K</h2>
+        </div>
+        <h3 class="title is-5 has-text-centered" style="margin-top: 12px; margin-bottom: 20px;">Depth Estimation</h3>
+        <p style="text-align:center; " class="has-text-centered">
+          <br>
+          <br>
+        </p>
+
+        <div class="container">
+          <ul class="nav nav-tabs nav-fill nav-justified" id="id-cs-recon">
+              <li class="nav-item">
+                <a class="nav-link active" onclick="id_cs(0)">1</a>
+              </li>      
+              <li class="nav-item">
+                <a class="nav-link" onclick="id_cs(1)">2</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" onclick="id_cs(2)">3</a>
+              </li>
+          </ul>
+          <div class="b-dics" style="width: 1000px; font-weight: 600;">
+              <img src="images/cs_id1.jpg" alt="RGB">
+              <img src="images/cs_id1_ours.jpg" alt="Ours">
+              <img src="images/cs_id1_zoe.jpg" alt="Depth-Anything V2"> 
+          </div>
+        </div>
+
+        <br><br>
+
+        <h3 class="title is-5 has-text-centered" style="margin-top: 12px; margin-bottom: 20px;">Surface Normal Estimation</h3>
+        <p style="text-align:center; " class="has-text-centered">
+          <br>
+          <br>
+        </p>
+
+
+        <div class="container">
+          <ul class="nav nav-tabs nav-fill nav-justified" id="id-scannet-recon">
+              <li class="nav-item">
+                <a class="nav-link active" onclick="id_scannet(0)">1</a>
+              </li>      
+              <li class="nav-item">
+                <a class="nav-link" onclick="id_scannet(1)">2</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" onclick="id_scannet(2)">3</a>
+              </li>
+          </ul>
+          <div class="b-dics" style="width: 1000px; font-weight: 600;">
+              <img src="images/scan_id1.jpg" alt="RGB">
+              <img src="images/scan_id1_ours.jpg" alt="Ours">
+              <img src="images/scan_id1_zoe.jpg" alt="Metric3D V2"> 
+          </div>
+        </div>
+        <br>
+        <br>
+        
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<section class="section">
+  <div class="container is-max-desktop">
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-four-fifths">
+        <h2 class="title is-3" style="margin-top: -30px">Method</h2>
+        <div class="content has-text-justified">
+          <p>
+            <br>
+            We introduce a multi-patch framework for high-resolution monocular geometry estimation, delivering <strong><font color="red">sharp</font></strong> and <strong><font color="red">globally consistent</font></strong> depth and surface normals at any resolution (e.g., 2K, 4K, 8K) from a single RGB image.
+            <br>
+            The main ideas are:
+            <br>
+            <ol>
+              <li>
+                Reformulating high-resolution prediction as a multi-patch refinement task: we divide the input image into spatial patches, augment each patch with coarse depth and normal priors, and process all patches jointly with a unified transformer backbone.
+              </li>
+              <li>
+                Employing cross-patch attention with global positional encoding to propagate information across distant regions, enforcing seamless boundaries and coherent geometry across the entire image.
+              </li>
+              <li>
+                Introducing a Variable Multi-Patch Training (GridMix) strategy that samples different patch-grid configurations during training, improving robustness to image resolution and spatial layout and yielding strong zero-shot performance on real-world benchmarks.
+              </li>
+            </ol>
+
+            <br>
+            <br>
+            <div class="pipeline-wrapper">
+              <img src="images/pipeline.jpg" alt="Framework diagram">
+              <p style="margin-top: -1px">
+                <b><i>Framework</i></b>
+              </p>
+            </div>
+            <br>
+            <br>
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<script>
+  document.addEventListener('DOMContentLoaded', function () {
+    const stacks = document.querySelectorAll('.magnifier-stack');
+    if (!stacks.length) {
+      return;
+    }
+
+    stacks.forEach(function (stack) {
+      let zoom = Number(stack.dataset.zoom) || 1.5;
+      const items = Array.from(stack.querySelectorAll('.magnifier-item'));
+      if (!items.length) {
+        return;
+      }
+
+      const wrapper = stack.closest('.magnifier-wrapper');
+      const zoomInput = wrapper ? wrapper.querySelector('.magnifier-zoom-input') : null;
+      const zoomValue = wrapper ? wrapper.querySelector('.magnifier-zoom-value') : null;
+      let displayScale = 1;
+      if (wrapper) {
+        const attrScale = Number(wrapper.dataset.imageScale);
+        if (!Number.isNaN(attrScale) && attrScale > 0) {
+          displayScale = attrScale;
+        }
+      }
+
+      const applyDisplayScale = function () {
+        if (wrapper) {
+          wrapper.style.setProperty('--display-scale', displayScale.toString());
+          wrapper.dataset.imageScale = displayScale.toString();
+        }
+      };
+
+      const images = items.map(function (item) {
+        return item.querySelector('.magnifier-image');
+      });
+      const lenses = items.map(function (item) {
+        return item.querySelector('.magnifier-lens');
+      });
+      const primaryItem = items[0];
+      const primaryImg = images[0];
+
+      const refreshZoomDisplay = function () {
+        if (zoomValue) {
+          zoomValue.textContent = zoom.toFixed(1) + '×';
+        }
+        stack.dataset.zoom = zoom;
+      };
+
+      const updateLensBackgroundFor = function (img, lens) {
+        if (!img.complete || !img.naturalWidth) {
+          return;
+        }
+        const source = img.currentSrc || img.src;
+        const bounds = img.getBoundingClientRect();
+        lens.style.backgroundImage = "url('" + source + "')";
+        lens.style.backgroundSize = bounds.width * zoom + 'px ' + bounds.height * zoom + 'px';
+      };
+
+      const updateAllBackgrounds = function () {
+        images.forEach(function (img, index) {
+          updateLensBackgroundFor(img, lenses[index]);
+        });
+      };
+
+      applyDisplayScale();
+
+      images.forEach(function (img, index) {
+        if (img.complete) {
+          updateLensBackgroundFor(img, lenses[index]);
+        } else {
+          img.addEventListener('load', function () {
+            updateLensBackgroundFor(img, lenses[index]);
+          });
+        }
+      });
+
+      refreshZoomDisplay();
+
+      if (zoomInput) {
+        zoomInput.value = zoom.toString();
+        zoomInput.addEventListener('input', function (event) {
+          const inputValue = Number(event.target.value);
+          if (Number.isNaN(inputValue)) {
+            return;
+          }
+          zoom = inputValue;
+          refreshZoomDisplay();
+          updateAllBackgrounds();
+        });
+      }
+
+      const setDisplayScale = function (newScale) {
+        const parsed = Number(newScale);
+        if (Number.isNaN(parsed) || parsed <= 0) {
+          return;
+        }
+        displayScale = parsed;
+        applyDisplayScale();
+        updateAllBackgrounds();
+      };
+
+      if (wrapper) {
+        wrapper.magnifierSetScale = setDisplayScale;
+      }
+
+      const showLenses = function () {
+        lenses.forEach(function (lens) {
+          lens.classList.add('is-visible');
+        });
+      };
+
+      const hideLenses = function () {
+        lenses.forEach(function (lens) {
+          lens.classList.remove('is-visible');
+        });
+      };
+
+      const moveLensesAt = function (clientX, clientY, referenceImg) {
+        const baseBounds = (referenceImg || primaryImg).getBoundingClientRect();
+        if (!baseBounds.width || !baseBounds.height) {
+          return;
+        }
+
+        const ratioX = Math.max(0, Math.min(1, (clientX - baseBounds.left) / baseBounds.width));
+        const ratioY = Math.max(0, Math.min(1, (clientY - baseBounds.top) / baseBounds.height));
+
+        images.forEach(function (img, index) {
+          const lens = lenses[index];
+          const bounds = img.getBoundingClientRect();
+          const lensWidth = lens.offsetWidth;
+          const lensHeight = lens.offsetHeight;
+          const halfWidth = lensWidth / 2;
+          const halfHeight = lensHeight / 2;
+
+          const x = ratioX * bounds.width;
+          const y = ratioY * bounds.height;
+
+          const clampedX = Math.max(halfWidth, Math.min(bounds.width - halfWidth, x));
+          const clampedY = Math.max(halfHeight, Math.min(bounds.height - halfHeight, y));
+
+          lens.style.left = (clampedX - halfWidth) + 'px';
+          lens.style.top = (clampedY - halfHeight) + 'px';
+
+          const bgWidth = bounds.width * zoom;
+          const bgHeight = bounds.height * zoom;
+          const maxBgX = Math.max(bgWidth - lensWidth, 0);
+          const maxBgY = Math.max(bgHeight - lensHeight, 0);
+          const bgX = Math.min(Math.max(x * zoom - halfWidth, 0), maxBgX);
+          const bgY = Math.min(Math.max(y * zoom - halfHeight, 0), maxBgY);
+
+          lens.style.backgroundPosition = '-' + bgX + 'px -' + bgY + 'px';
+        });
+      };
+
+      const attachPointerHandlers = function (item, img) {
+        item.addEventListener('mouseenter', function (event) {
+          updateAllBackgrounds();
+          showLenses();
+          moveLensesAt(event.clientX, event.clientY, img);
+        });
+
+        item.addEventListener('mousemove', function (event) {
+          event.preventDefault();
+          moveLensesAt(event.clientX, event.clientY, img);
+        });
+
+        item.addEventListener('mouseleave', hideLenses);
+
+        item.addEventListener('touchstart', function (event) {
+          updateAllBackgrounds();
+          showLenses();
+          if (event.touches && event.touches.length > 0) {
+            const touch = event.touches[0];
+            moveLensesAt(touch.clientX, touch.clientY, img);
+          }
+        }, { passive: false });
+
+        item.addEventListener('touchmove', function (event) {
+          if (!event.touches || event.touches.length === 0) {
+            return;
+          }
+          event.preventDefault();
+          const touch = event.touches[0];
+          moveLensesAt(touch.clientX, touch.clientY, img);
+        }, { passive: false });
+
+        item.addEventListener('touchend', hideLenses);
+        item.addEventListener('touchcancel', hideLenses);
+      };
+
+      items.forEach(function (item, index) {
+        attachPointerHandlers(item, images[index]);
+      });
+
+      window.addEventListener('resize', updateAllBackgrounds);
+    });
+
+    const groupButtons = Array.from(document.querySelectorAll('.magnifier-group-button'));
+    const groups = Array.from(document.querySelectorAll('.magnifier-group'));
+
+    if (groupButtons.length && groups.length) {
+      const showGroup = function (targetId) {
+        groups.forEach(function (group) {
+          const isTarget = group.dataset.group === targetId;
+          group.classList.toggle('is-hidden', !isTarget);
+          if (isTarget) {
+            const wrapper = group.querySelector('.magnifier-wrapper');
+            if (wrapper && typeof wrapper.magnifierSetScale === 'function') {
+              const currentScale = Number(wrapper.dataset.imageScale) || 1;
+              window.requestAnimationFrame(function () {
+                wrapper.magnifierSetScale(currentScale);
+              });
+            }
+          }
+        });
+
+        groupButtons.forEach(function (button) {
+          button.classList.toggle('is-active', button.dataset.target === targetId);
+        });
+      };
+
+      groupButtons.forEach(function (button) {
+        button.addEventListener('click', function () {
+          showGroup(button.dataset.target);
+        });
+      });
+
+      const initialButton = groupButtons.find(function (button) {
+        return button.classList.contains('is-active');
+      }) || groupButtons[0];
+
+      if (initialButton) {
+        showGroup(initialButton.dataset.target);
+      }
+    }
+
+    if (!window.setMagnifierImageScale) {
+      window.setMagnifierImageScale = function (newScale) {
+        const value = Number(newScale);
+        if (Number.isNaN(value) || value <= 0) {
+          return;
+        }
+        document.querySelectorAll('.magnifier-wrapper').forEach(function (wrapper) {
+          if (typeof wrapper.magnifierSetScale === 'function') {
+            wrapper.magnifierSetScale(value);
+          }
+        });
+      };
+    }
+  });
+</script>
+
+</body>
+</html>
