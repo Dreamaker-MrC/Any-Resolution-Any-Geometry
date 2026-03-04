@@ -3,7 +3,7 @@
 
 [![Project Website](https://img.shields.io/badge/Project-Website-1f6feb?logo=googlechrome&logoColor=white)](https://dreamaker-mrc.github.io/Any-Resolution-Any-Geometry/) [![Paper](https://img.shields.io/badge/arXiv-PDF-b31b1b)](https://arxiv.org/abs/2603.03026) [![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)](https://opensource.org/licenses/MIT)
 
-<a href="https://dreamaker-mrc.github.io/">Wenqing Cui</a><sup>1</sup>, <a href="https://zhyever.github.io/">Zhenyu Li</a><sup>1,†</sup>, Mykola Lavreniuk<sup>2,†</sup>, Jian Shi<sup>1</sup>, Ramzi Idoughi<sup>1</sup>, Xiangjun Tang<sup>1</sup>, <a href="https://peterwonka.net/">Peter Wonka</a><sup>1</sup>.
+<a href="https://dreamaker-mrc.github.io/">Wenqing Cui</a><sup>1</sup>, <a href="https://zhyever.github.io/">Zhenyu Li</a><sup>1,†</sup>, Mykola Lavreniuk<sup>2,†</sup>, Jian Shi<sup>1</sup>, Ramzi Idoughi<sup>1</sup>, <a href="https://yuyujunjun.github.io">Xiangjun Tang</a><sup>1</sup>, <a href="https://peterwonka.net/">Peter Wonka</a><sup>1</sup>.
 <br><sup>1</sup>KAUST, <sup>2</sup>Space Research Institute NASU-SSAU
 <br><sup>†</sup>Equal contribution
 
@@ -132,13 +132,10 @@ For an input named `image.jpg`, the following files are written to `--output-dir
 ## Citation
 If you find our work useful for your research, please consider citing the paper
 ```
-@misc{cui2026resolutiongeometrymultiviewmultipatch,
-      title={Any Resolution Any Geometry: From Multi-View To Multi-Patch},
-      author={Wenqing Cui and Zhenyu Li and Mykola Lavreniuk and Jian Shi and Ramzi Idoughi and Xiangjun Tang and Peter Wonka},
-      year={2026},
-      eprint={2603.03026},
-      archivePrefix={arXiv},
-      primaryClass={cs.CV},
-      url={https://arxiv.org/abs/2603.03026},
+@inproceedings{cui2026resolutiongeometrymultiviewmultipatch,
+  title={Any Resolution Any Geometry: From Multi-View To Multi-Patch},
+  author={Cui, Wenqing and Li, Zhenyu and Lavreniuk, Mykola and Shi, Jian and Idoughi, Ramzi and Tang, Xiangjun and Wonka, Peter},
+  booktitle={Proceedings of the IEEE/CVF Conference on Computer Vision and Pattern Recognition (CVPR)},
+  year={2026}
 }
 ```
