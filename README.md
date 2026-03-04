@@ -1,7 +1,7 @@
 <div align="center">
 <h2> Any Resolution Any Geometry: From Multi-View To Multi-Patch </h2>
 
-[![Project Website](https://img.shields.io/badge/Project-Website-1f6feb?logo=googlechrome&logoColor=white)](https://dreamaker-mrc.github.io/Any-Resolution-Any-Geometry/) [![Paper](https://img.shields.io/badge/arXiv-PDF-b31b1b)](https://arxiv.org/abs/2312.02284) [![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)](https://opensource.org/licenses/MIT)
+[![Project Website](https://img.shields.io/badge/Project-Website-1f6feb?logo=googlechrome&logoColor=white)](https://dreamaker-mrc.github.io/Any-Resolution-Any-Geometry/) [![Paper](https://img.shields.io/badge/arXiv-PDF-b31b1b)](https://arxiv.org/abs/2603.03026) [![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)](https://opensource.org/licenses/MIT)
 
 <a href="https://dreamaker-mrc.github.io/">Wenqing Cui</a><sup>1</sup>, <a href="https://zhyever.github.io/">Zhenyu Li</a><sup>1,†</sup>, Mykola Lavreniuk<sup>2,†</sup>, Jian Shi<sup>1</sup>, Ramzi Idoughi<sup>1</sup>, Xiangjun Tang<sup>1</sup>, <a href="https://peterwonka.net/">Peter Wonka</a><sup>1</sup>.
 <br><sup>1</sup>KAUST, <sup>2</sup>Space Research Institute NASU-SSAU
@@ -129,16 +129,16 @@ For an input named `image.jpg`, the following files are written to `--output-dir
 | `image_coarse_normal.npy` | *(with `--save-intermediates`)* Raw coarse normal array |
 
 
-## **Acknowledgement**
-
-
 ## Citation
 If you find our work useful for your research, please consider citing the paper
-<!-- ```
-@article{li2023patchfusion,
-    title={PatchFusion: An End-to-End Tile-Based Framework for High-Resolution Monocular Metric Depth Estimation},
-    author={Zhenyu Li and Shariq Farooq Bhat and Peter Wonka},
-    booktitle={CVPR},
-    year={2024}
+```
+@misc{cui2026resolutiongeometrymultiviewmultipatch,
+      title={Any Resolution Any Geometry: From Multi-View To Multi-Patch},
+      author={Wenqing Cui and Zhenyu Li and Mykola Lavreniuk and Jian Shi and Ramzi Idoughi and Xiangjun Tang and Peter Wonka},
+      year={2026},
+      eprint={2603.03026},
+      archivePrefix={arXiv},
+      primaryClass={cs.CV},
+      url={https://arxiv.org/abs/2603.03026},
 }
-``` -->
+```

@@ -272,7 +272,7 @@
           <div class="column has-text-centered">
             <div class="publication-links">
               <span class="link-block">
-                <a href="#" target="_blank" rel="noopener noreferrer" class="external-link button is-normal is-rounded is-dark">
+                <a href="https://arxiv.org/abs/2603.03026" target="_blank" rel="noopener noreferrer" class="external-link button is-normal is-rounded is-dark">
                   <span class="icon">
                     <i class="ai ai-arxiv"></i>
                   </span>
@@ -829,6 +829,37 @@
       };
     }
   });
+</script>
+
+
+<section class="section" id="BibTeX">
+  <div class="container is-max-desktop content">
+    <h2 class="title">BibTeX</h2>
+    <div style="position: relative;">
+      <pre><code id="bibtex-code">@misc{cui2026resolutiongeometrymultiviewmultipatch,
+      title={Any Resolution Any Geometry: From Multi-View To Multi-Patch},
+      author={Wenqing Cui and Zhenyu Li and Mykola Lavreniuk and Jian Shi and Ramzi Idoughi and Xiangjun Tang and Peter Wonka},
+      year={2026},
+      eprint={2603.03026},
+      archivePrefix={arXiv},
+      primaryClass={cs.CV},
+      url={https://arxiv.org/abs/2603.03026},
+}</code></pre>
+      <button id="copy-bibtex-btn" onclick="copyBibTeX()" style="position: absolute; top: 8px; right: 8px; background: #4a4a4a; color: #fff; border: none; border-radius: 6px; padding: 5px 12px; font-size: 0.85rem; cursor: pointer;">
+        Copy
+      </button>
+    </div>
+  </div>
+</section>
+<script>
+  function copyBibTeX() {
+    var text = document.getElementById('bibtex-code').innerText;
+    navigator.clipboard.writeText(text).then(function () {
+      var btn = document.getElementById('copy-bibtex-btn');
+      btn.textContent = 'Copied!';
+      setTimeout(function () { btn.textContent = 'Copy'; }, 2000);
+    });
+  }
 </script>
 
 </body>
